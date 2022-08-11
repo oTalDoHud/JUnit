@@ -1,6 +1,8 @@
 package br.ce.wcaquinho.servicos;
 
 
+import br.ce.wcaquino.Exception.FilmeSemEstoqueException;
+import br.ce.wcaquino.Exception.LocadoraException;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -50,7 +52,7 @@ public class LocacaoServiceTeste {
     }
 
     //Nesse vc informa qual exceção está esperando, bem elegante
-    @Test(expected = Exception.class)
+    @Test(expected = FilmeSemEstoqueException.class)
     public void testeLocacaoFilemSemEstoque() throws Exception {
         //cenario
         LocacaoService ls = new LocacaoService();
@@ -60,6 +62,7 @@ public class LocacaoServiceTeste {
         //ação
         Locacao locacao = null;
         locacao = ls.alugarFilme(usuario, filme);
+        //forma elegante
     }
 
     @Test
@@ -77,6 +80,7 @@ public class LocacaoServiceTeste {
         } catch (Exception e) {
             Assert.assertThat(e.getMessage(), CoreMatchers.is("Filme fora de estoque"));
         }
+        //forma robusta
     }
 
     @Test
@@ -93,7 +97,40 @@ public class LocacaoServiceTeste {
 
         //validação
         expectedException.expectMessage("Filme fora de estoque");
+        //forma nova
     }
 
+
+    @Test
+    public void testeLocacaoUsuarioVazio() throws FilmeSemEstoqueException {
+        //cenario
+        LocacaoService ls = new LocacaoService();
+        Filme filme = new Filme("Senhor dos aneis", 1, 5.0);
+
+        //ação
+        try {
+            ls.alugarFilme(null, filme);
+            Assert.fail();
+        } catch (LocadoraException e) {
+            Assert.assertThat(e.getMessage(), CoreMatchers.is("Usuário nulo"));
+        }
+        //forma robusta
+    }
+
+    @Test
+    public void testeLocacaoFilmeVazio() throws FilmeSemEstoqueException, LocadoraException {
+        //cenario
+        LocacaoService ls = new LocacaoService();
+        Usuario usuario = new Usuario("Hudson user");
+        Filme filme = new Filme("Senhor dos aneis", 1, 5.0);
+        expectedException.expect(LocadoraException.class);
+
+        //ação
+        ls.alugarFilme(usuario, null);
+
+        expectedException.expectMessage("filme nulo");
+
+        //forma nova
+    }
 
 }
