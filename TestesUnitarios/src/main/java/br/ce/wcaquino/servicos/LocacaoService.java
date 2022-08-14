@@ -24,7 +24,7 @@ public class LocacaoService {
         }
 
         if (filme.getEstoque() == 0) {
-            throw new FilmeSemEstoqueException();
+            throw new FilmeSemEstoqueException("Filme fora de estoque");
         }
         Locacao locacao = new Locacao();
         locacao.setFilme(filme);

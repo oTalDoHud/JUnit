@@ -4,9 +4,7 @@ package br.ce.wcaquinho.servicos;
 import br.ce.wcaquino.Exception.FilmeSemEstoqueException;
 import br.ce.wcaquino.Exception.LocadoraException;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 
 import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
@@ -18,6 +16,8 @@ import org.junit.rules.ExpectedException;
 
 public class LocacaoServiceTeste {
 
+    private LocacaoService ls;
+    private static Integer cont;
     //Usando o ErrorCollector ele faz todos os teste mesmo que o primeir falhe
     @Rule
     public ErrorCollector errorCollector = new ErrorCollector();
@@ -25,10 +25,26 @@ public class LocacaoServiceTeste {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    @Before
+    public void setup() {
+        ls = new LocacaoService();
+
+        cont++;
+        if(cont != 1){
+            System.out.println(cont + " testes foram feitos");
+        }else {
+            System.out.println(cont + " teste foi feito");
+        }
+    }
+
+    @BeforeClass
+    public static void setupClass() {
+        cont = 0;
+    }
+
     @Test
     public void testeLocacao() throws Exception {
         //cenario
-        LocacaoService ls = new LocacaoService();
         Usuario usuario = new Usuario("Hudson user");
         Filme filme = new Filme("Senhor dos aneis", 2, 5.0);
 
