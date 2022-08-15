@@ -14,18 +14,18 @@ import br.ce.wcaquino.utils.DataUtils;
 public class LocacaoService {
 
     public Locacao alugarFilme(Usuario usuario, Filme filme) throws FilmeSemEstoqueException, LocadoraException {
-
-        if(filme == null){
-            throw new LocadoraException("Filme nulo");
+        if(usuario == null) {
+            throw new LocadoraException("Usuario vazio");
         }
 
-        if(usuario == null){
-            throw new LocadoraException("Usuário nulo");
+        if(filme == null) {
+            throw new LocadoraException("Filme vazio");
         }
 
-        if (filme.getEstoque() == 0) {
-            throw new FilmeSemEstoqueException("Filme fora de estoque");
+        if(filme.getEstoque() == 0) {
+            throw new FilmeSemEstoqueException();
         }
+
         Locacao locacao = new Locacao();
         locacao.setFilme(filme);
         locacao.setUsuario(usuario);

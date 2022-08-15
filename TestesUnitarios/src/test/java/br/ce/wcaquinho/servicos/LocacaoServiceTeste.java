@@ -14,6 +14,9 @@ import br.ce.wcaquino.utils.DataUtils;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 public class LocacaoServiceTeste {
 
     private LocacaoService ls;
@@ -58,95 +61,52 @@ public class LocacaoServiceTeste {
         Assert.assertEquals(locacao.getUsuario().getNome(), usuario.getNome());
 
         Assert.assertEquals(5.0, locacao.getValor(), 0.1);
-        errorCollector.checkThat(locacao.getValor(), CoreMatchers.is(5.0));
+        errorCollector.checkThat(locacao.getValor(), is(5.0));
 
-        errorCollector.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(), DataUtils.dataHoje()), CoreMatchers.is(true));
+        errorCollector.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(), DataUtils.dataHoje()), is(true));
         errorCollector.checkThat(DataUtils.isMesmaData(
-                DataUtils.adicionarDias(locacao.getDataLocacao(), 1), DataUtils.adicionarDias(DataUtils.dataHoje(), 1)), CoreMatchers.is(true));
+                DataUtils.adicionarDias(locacao.getDataLocacao(), 1), DataUtils.adicionarDias(DataUtils.dataHoje(), 1)), is(true));
 
 
     }
 
     //Nesse vc informa qual exceção está esperando, bem elegante
     @Test(expected = FilmeSemEstoqueException.class)
-    public void testeLocacaoFilemSemEstoque() throws Exception {
+    public void testLocacao_filmeSemEstoque() throws Exception{
         //cenario
-        LocacaoService ls = new LocacaoService();
-        Usuario usuario = new Usuario("Hudson user");
-        Filme filme = new Filme("Senhor dos aneis", 0, 5.0);
+        Usuario usuario = new Usuario("Usuario 1");
+        Filme filme = new Filme("Filme 2", 0, 4.0);
 
-        //ação
-        Locacao locacao = null;
-        locacao = ls.alugarFilme(usuario, filme);
-        //forma elegante
+        //acao
+        ls.alugarFilme(usuario, filme);
+        //ELEGANTE
     }
 
     @Test
-    public void testeLocacaoFilemSemEstoque2() {
+    public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException{
         //cenario
-        LocacaoService ls = new LocacaoService();
-        Usuario usuario = new Usuario("Hudson user");
-        Filme filme = new Filme("Senhor dos aneis", 0, 5.0);
+        Filme filme = new Filme("Filme 2", 1, 4.0);
 
-        //ação
-        Locacao locacao = null;
-        try {
-            locacao = ls.alugarFilme(usuario, filme);
-            Assert.fail("Deveria ter lançãdo a exceção");
-        } catch (Exception e) {
-            Assert.assertThat(e.getMessage(), CoreMatchers.is("Filme fora de estoque"));
-        }
-        //forma robusta
-    }
-
-    @Test
-    public void testeLocacaoFilemSemEstoque3() throws Exception {
-        //cenario
-        LocacaoService ls = new LocacaoService();
-        Usuario usuario = new Usuario("Hudson user");
-        Filme filme = new Filme("Senhor dos aneis", 0, 5.0);
-        expectedException.expect(Exception.class);
-
-        //ação
-        Locacao locacao = null;
-        locacao = ls.alugarFilme(usuario, filme);
-
-        //validação
-        expectedException.expectMessage("Filme fora de estoque");
-        //forma nova
-    }
-
-
-    @Test
-    public void testeLocacaoUsuarioVazio() throws FilmeSemEstoqueException {
-        //cenario
-        LocacaoService ls = new LocacaoService();
-        Filme filme = new Filme("Senhor dos aneis", 1, 5.0);
-
-        //ação
+        //acao
         try {
             ls.alugarFilme(null, filme);
             Assert.fail();
         } catch (LocadoraException e) {
-            Assert.assertThat(e.getMessage(), CoreMatchers.is("Usuário nulo"));
+            assertThat(e.getMessage(), is("Usuario vazio"));
         }
-        //forma robusta
+        //ROBUSTA
     }
 
     @Test
-    public void testeLocacaoFilmeVazio() throws FilmeSemEstoqueException, LocadoraException {
+    public void testLocacao_FilmeVazio() throws FilmeSemEstoqueException, LocadoraException{
         //cenario
-        LocacaoService ls = new LocacaoService();
-        Usuario usuario = new Usuario("Hudson user");
-        Filme filme = new Filme("Senhor dos aneis", 1, 5.0);
+        Usuario usuario = new Usuario("Usuario 1");
+
         expectedException.expect(LocadoraException.class);
+        expectedException.expectMessage("Filme vazio");
 
-        //ação
+        //acao
         ls.alugarFilme(usuario, null);
-
-        expectedException.expectMessage("filme nulo");
-
-        //forma nova
+        //NOVA
     }
-
 }
