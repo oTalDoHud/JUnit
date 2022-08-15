@@ -25,35 +25,24 @@ public class LocacaoService {
         Double totalValor = 0.0;
 
         if (filmes != null) {
-            System.out.println("Entrou no for each");
             for (Filme x : filmes) {
                 if (x.getEstoque() == 0) {
                     System.out.println("Disparou a excessão");
                     throw new FilmeSemEstoqueException();
                 }
             }
-            System.out.println("Ponto 01");
 
             for (Filme x : filmes) {
                 totalValor += x.getPrecoLocacao();
             }
-
-            System.out.println("Ponto 02");
-
         }
 
-        System.out.println("Ponto 03");
 
 
         Date dataEntrega = new Date();
         dataEntrega = adicionarDias(dataEntrega, 1);
-        System.out.println("Ponto 04");
-
 
         Locacao locacao = new Locacao(usuario, filmes, new Date(), dataEntrega, totalValor);
-
-        System.out.println("Ponto 05");
-
 
         //Salvando a locacao...
         //TODO adicionar método para salvar
