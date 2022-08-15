@@ -1,41 +1,59 @@
 package br.ce.wcaquino.servicos;
 
-import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
-
-import java.util.Date;
-
 import br.ce.wcaquino.Exception.FilmeSemEstoqueException;
 import br.ce.wcaquino.Exception.LocadoraException;
 import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
-import br.ce.wcaquino.utils.DataUtils;
+
+import java.util.Date;
+import java.util.List;
+
+import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
 
 public class LocacaoService {
 
-    public Locacao alugarFilme(Usuario usuario, Filme filme) throws FilmeSemEstoqueException, LocadoraException {
-        if(usuario == null) {
+    public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws FilmeSemEstoqueException, LocadoraException {
+        if (usuario == null) {
             throw new LocadoraException("Usuario vazio");
         }
 
-        if(filme == null) {
+        if (filmes == null) {
             throw new LocadoraException("Filme vazio");
         }
 
-        if(filme.getEstoque() == 0) {
-            throw new FilmeSemEstoqueException();
+        Double totalValor = 0.0;
+
+        if (filmes != null) {
+            System.out.println("Entrou no for each");
+            for (Filme x : filmes) {
+                if (x.getEstoque() == 0) {
+                    System.out.println("Disparou a excessão");
+                    throw new FilmeSemEstoqueException();
+                }
+            }
+            System.out.println("Ponto 01");
+
+            for (Filme x : filmes) {
+                totalValor += x.getPrecoLocacao();
+            }
+
+            System.out.println("Ponto 02");
+
         }
 
-        Locacao locacao = new Locacao();
-        locacao.setFilme(filme);
-        locacao.setUsuario(usuario);
-        locacao.setDataLocacao(new Date());
-        locacao.setValor(filme.getPrecoLocacao());
+        System.out.println("Ponto 03");
 
-        //Entrega no dia seguinte
+
         Date dataEntrega = new Date();
         dataEntrega = adicionarDias(dataEntrega, 1);
-        locacao.setDataRetorno(dataEntrega);
+        System.out.println("Ponto 04");
+
+
+        Locacao locacao = new Locacao(usuario, filmes, new Date(), dataEntrega, totalValor);
+
+        System.out.println("Ponto 05");
+
 
         //Salvando a locacao...
         //TODO adicionar método para salvar
