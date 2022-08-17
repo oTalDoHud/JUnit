@@ -13,10 +13,13 @@ import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LocacaoServiceTest {
 
@@ -58,7 +61,7 @@ public class LocacaoServiceTest {
 
 
         //verificação
-        Assert.assertTrue(locacao.getUsuario().getNome().equals(usuario.getNome()));
+        assertTrue(locacao.getUsuario().getNome().equals(usuario.getNome()));
         Assert.assertEquals(locacao.getUsuario().getNome(), usuario.getNome());
 
         Assert.assertEquals(12.25, locacao.getValor(), 0.1);
@@ -177,6 +180,20 @@ public class LocacaoServiceTest {
 
         //verificação
         assertThat(resultado.getValor(), is(14.0));
+    }
+
+    @Test
+    public void naoDeveDevolverFilmesNoDomingo() throws FilmeSemEstoqueException, LocadoraException {
+        //cenario
+        Usuario usuario = new Usuario("Usuario 1");
+        List<Filme> filmes = listSenhorDosAneis(1);
+
+        //ação
+        Locacao retorno = ls.alugarFilme(usuario, filmes);
+
+        //verificação
+        Boolean ehDomingo = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.SUNDAY);
+        assertFalse(ehDomingo);
     }
 
     public List<Filme> listSenhorDosAneis(int quantosFilmesQuer) {

@@ -6,10 +6,12 @@ import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
+import static br.ce.wcaquino.utils.DataUtils.verificarDiaSemana;
 
 public class LocacaoService {
 
@@ -54,6 +56,9 @@ public class LocacaoService {
 
         Date dataEntrega = new Date();
         dataEntrega = adicionarDias(dataEntrega, 1);
+        if (verificarDiaSemana(dataEntrega, Calendar.SUNDAY)){
+            dataEntrega = adicionarDias(dataEntrega, 1);
+        }
 
         Locacao locacao = new Locacao(usuario, filmes, new Date(), dataEntrega, valorTotal);
 
