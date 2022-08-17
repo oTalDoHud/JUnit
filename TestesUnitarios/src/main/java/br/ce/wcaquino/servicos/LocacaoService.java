@@ -18,31 +18,44 @@ public class LocacaoService {
             throw new LocadoraException("Usuario vazio");
         }
 
-        if (filmes == null) {
+        if (filmes == null || filmes.isEmpty()) {
             throw new LocadoraException("Filme vazio");
         }
 
-        Double totalValor = 0.0;
+        Double valorTotal = 0.0;
 
-        if (filmes != null) {
-            for (Filme x : filmes) {
-                if (x.getEstoque() == 0) {
-                    System.out.println("Disparou a excessão");
-                    throw new FilmeSemEstoqueException();
-                }
-            }
-
-            for (Filme x : filmes) {
-                totalValor += x.getPrecoLocacao();
+        for (Filme x : filmes) {
+            if (x.getEstoque() == 0) {
+                throw new FilmeSemEstoqueException();
             }
         }
 
+        for (int i = 0; i < filmes.size(); i++) {
+            Filme filme = filmes.get(i);
+            double valorFilme = filme.getPrecoLocacao();
 
+            switch (i) {
+                case 2:
+                    valorFilme = valorFilme * 0.75;
+                    break;
+                case 3:
+                    valorFilme = valorFilme * 0.5;
+                    break;
+                case 4:
+                    valorFilme = valorFilme * 0.25;
+                    break;
+                case 5:
+                    valorFilme = 0d;
+                    break;
+            }
+
+            valorTotal += valorFilme;
+        }
 
         Date dataEntrega = new Date();
         dataEntrega = adicionarDias(dataEntrega, 1);
 
-        Locacao locacao = new Locacao(usuario, filmes, new Date(), dataEntrega, totalValor);
+        Locacao locacao = new Locacao(usuario, filmes, new Date(), dataEntrega, valorTotal);
 
         //Salvando a locacao...
         //TODO adicionar método para salvar
