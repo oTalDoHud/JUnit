@@ -10,8 +10,6 @@ i
 9.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml,b/8/b8d96649614bd84192f3496ef7d33bab1d1e5ec1
 a
 1src/main/java/br/ce/wcaquino/entidades/Filme.java,a/c/ace9517f75ecc9999dfdd5c4bdabc9b998b07e8d
-e
-5src/test/java/br/ce/wcaquinho/servicos/OrdemTest.java,c/a/ca77bd2abcbef57ddc48d6e0371a197a72dfbc95
 t
 Dsrc/main/java/br/ce/wcaquino/Exception/FilmeSemEstoqueException.java,d/e/de6c65085190295109541fee3762f187bebd2ef5
 m

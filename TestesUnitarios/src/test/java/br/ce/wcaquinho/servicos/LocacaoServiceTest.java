@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static matchers.MatchersProprios.caiEm;
+import static matchers.MatchersProprios.caiNumaSegunda;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -196,6 +198,21 @@ public class LocacaoServiceTest {
         //verificação
         Boolean ehDomingo = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.SUNDAY);
         assertFalse(ehDomingo);
+    }
+
+    @Test
+    public void deveDevolverNaSegundaAoAlugarNoSabado() throws FilmeSemEstoqueException, LocadoraException {
+        //cenario
+        Usuario usuario = new Usuario("Usuario 1");
+        List<Filme> filmes = listSenhorDosAneis(1);
+
+        //ação
+        Locacao retorno = ls.alugarFilme(usuario, filmes);
+        retorno.setDataRetorno((DataUtils.obterData(29,8,2022)));
+
+        //verificação
+        assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+        assertThat(retorno.getDataRetorno(), caiNumaSegunda());
     }
 
     public static List<Filme> listSenhorDosAneis(int quantosFilmesQuer) {
