@@ -1,14 +1,11 @@
 package br.ce.wcaquinho.servicos;
 
-import static org.junit.Assert.assertTrue;
-
 import br.ce.wcaquino.entidades.Usuario;
 import org.junit.Assert;
-import org.junit.Test;
 
 public class AssertTest {
 
-    @Test
+//    @Test
     public void teste() {
         Assert.assertTrue(true);
 
