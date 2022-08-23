@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static matchers.MatchersProprios.caiEm;
-import static matchers.MatchersProprios.caiNumaSegunda;
+import static matchers.MatchersProprios.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -69,9 +68,13 @@ public class LocacaoServiceTest {
         Assert.assertEquals(12.25, locacao.getValor(), 0.1);
         errorCollector.checkThat(locacao.getValor(), is(12.25));
 
-        errorCollector.checkThat(DataUtils.isMesmaData(locacao.getDataLocacao(), DataUtils.dataHoje()), is(true));
         errorCollector.checkThat(DataUtils.isMesmaData(
-                DataUtils.adicionarDias(locacao.getDataLocacao(), 1), DataUtils.adicionarDias(DataUtils.dataHoje(), 1)), is(true));
+                DataUtils.adicionarDias(locacao.getDataLocacao(), 1),
+                DataUtils.adicionarDias(DataUtils.dataHoje(), 1)), is(true));
+
+        errorCollector.checkThat(locacao.getDataLocacao(), ehHoje());
+
+        errorCollector.checkThat(locacao.getDataRetorno(), ehHojeComDiferencaDias(1));
     }
 
     //Nesse vc informa qual exceção está esperando, bem elegante
@@ -208,7 +211,7 @@ public class LocacaoServiceTest {
 
         //ação
         Locacao retorno = ls.alugarFilme(usuario, filmes);
-        retorno.setDataRetorno((DataUtils.obterData(29,8,2022)));
+        retorno.setDataRetorno((DataUtils.obterData(29, 8, 2022)));
 
         //verificação
         assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
