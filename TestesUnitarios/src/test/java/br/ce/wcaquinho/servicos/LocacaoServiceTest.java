@@ -118,71 +118,73 @@ public class LocacaoServiceTest {
         //NOVA
     }
 
+//    @Test
+//    public void devePagar75pctNoFilme3() throws FilmeSemEstoqueException, LocadoraException {
+//        //cenario
+//        Usuario usuario = new Usuario("Usuario 1");
+//        List<Filme> filmes = listSenhorDosAneis(3);
+//
+//        //ação
+//        for (Filme x : filmes) {
+//            x.setPrecoLocacao(4.0);
+//        }
+//        Locacao resultado = ls.alugarFilme(usuario, filmes);
+//
+//        //verificação
+//        assertThat(resultado.getValor(), is(11.0));
+//    }
+//
+//    @Test
+//    public void devePagar50pctNoFilme4() throws FilmeSemEstoqueException, LocadoraException {
+//        //cenario
+//        Usuario usuario = new Usuario("Usuario 1");
+//        List<Filme> filmes = listSenhorDosAneis(4);
+//
+//        //ação
+//        for (Filme x : filmes) {
+//            x.setPrecoLocacao(4.0);
+//        }
+//        Locacao resultado = ls.alugarFilme(usuario, filmes);
+//
+//        //verificação
+//        assertThat(resultado.getValor(), is(13.0));
+//    }
+//
+//    @Test
+//    public void devePagar25pctNoFilme5() throws FilmeSemEstoqueException, LocadoraException {
+//        //cenario
+//        Usuario usuario = new Usuario("Usuario 1");
+//        List<Filme> filmes = listSenhorDosAneis(5);
+//
+//        //ação
+//        for (Filme x : filmes) {
+//            x.setPrecoLocacao(4.0);
+//        }
+//        Locacao resultado = ls.alugarFilme(usuario, filmes);
+//
+//        //verificação
+//        assertThat(resultado.getValor(), is(14.0));
+//    }
+//
+//    @Test
+//    public void devePagar0pctNoFilme6() throws FilmeSemEstoqueException, LocadoraException {
+//        //cenario
+//        Usuario usuario = new Usuario("Usuario 1");
+//        List<Filme> filmes = listSenhorDosAneis(6);
+//
+//        //ação
+//        for (Filme x : filmes) {
+//            x.setPrecoLocacao(4.0);
+//        }
+//        Locacao resultado = ls.alugarFilme(usuario, filmes);
+//
+//        //verificação
+//        assertThat(resultado.getValor(), is(14.0));
+//    }
+
     @Test
-    public void devePagar75pctNoFilme3() throws FilmeSemEstoqueException, LocadoraException {
-        //cenario
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = listSenhorDosAneis(3);
-
-        //ação
-        for (Filme x : filmes) {
-            x.setPrecoLocacao(4.0);
-        }
-        Locacao resultado = ls.alugarFilme(usuario, filmes);
-
-        //verificação
-        assertThat(resultado.getValor(), is(11.0));
-    }
-
-    @Test
-    public void devePagar50pctNoFilme4() throws FilmeSemEstoqueException, LocadoraException {
-        //cenario
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = listSenhorDosAneis(4);
-
-        //ação
-        for (Filme x : filmes) {
-            x.setPrecoLocacao(4.0);
-        }
-        Locacao resultado = ls.alugarFilme(usuario, filmes);
-
-        //verificação
-        assertThat(resultado.getValor(), is(13.0));
-    }
-
-    @Test
-    public void devePagar25pctNoFilme5() throws FilmeSemEstoqueException, LocadoraException {
-        //cenario
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = listSenhorDosAneis(5);
-
-        //ação
-        for (Filme x : filmes) {
-            x.setPrecoLocacao(4.0);
-        }
-        Locacao resultado = ls.alugarFilme(usuario, filmes);
-
-        //verificação
-        assertThat(resultado.getValor(), is(14.0));
-    }
-
-    @Test
-    public void devePagar0pctNoFilme6() throws FilmeSemEstoqueException, LocadoraException {
-        //cenario
-        Usuario usuario = new Usuario("Usuario 1");
-        List<Filme> filmes = listSenhorDosAneis(6);
-
-        //ação
-        for (Filme x : filmes) {
-            x.setPrecoLocacao(4.0);
-        }
-        Locacao resultado = ls.alugarFilme(usuario, filmes);
-
-        //verificação
-        assertThat(resultado.getValor(), is(14.0));
-    }
-
-    @Test
+//    @Ignore
+    //Ignore é bem melhor do apenas comentar o @test, pois com ela fica a ser avisado que um teste foi ignorado
     public void naoDeveDevolverFilmesNoDomingo() throws FilmeSemEstoqueException, LocadoraException {
         //cenario
         Usuario usuario = new Usuario("Usuario 1");
@@ -196,7 +198,7 @@ public class LocacaoServiceTest {
         assertFalse(ehDomingo);
     }
 
-    public List<Filme> listSenhorDosAneis(int quantosFilmesQuer) {
+    public static List<Filme> listSenhorDosAneis(int quantosFilmesQuer) {
 
         List<Filme> todosOsFilmes = new ArrayList<Filme>();
         Filme filme1 = new Filme("Senhor dos aneis - A sociedade do anel", 2, 5.0);
