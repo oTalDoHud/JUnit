@@ -20,8 +20,6 @@ e
 5src/test/java/br/ce/wcaquinho/servicos/OrdemTest.java,c/a/ca77bd2abcbef57ddc48d6e0371a197a72dfbc95
 \
 ,src/test/java/matchers/DiaSemanaMatcher.java,d/b/db6aad6186857c5302a958f9bad01fc4d53a1774
-n
->src/test/java/br/ce/wcaquinho/servicos/LocacaoServiceTest.java,0/b/0be21a8bee3ef1fec92b98255ddfb08bcb428cfd
 l
 <src/test/java/matchers/ComparacaoComNumeroDeDiasMatcher.java,2/0/208567d3087e25fe69a72486e086296c41be9826
 a
