@@ -29,11 +29,10 @@ As regras acima foi testada utilizando o JUnit da seguinte forma:
 ### COMPORTAMENTE ESPERADO
 Nesse segundo cenário outras regras foram colocadas há teste:
  - __DEVE__ solicitar devolução do filme alugado na segunda e não aos domingos
- - __DEVE__ permiter alugar filme
+ - __DEVE__ permitir alugar filme
  - __DEVE__ lançar exceção a alugar filme sem estoque
- - __NÃO DEVE__ permiter aluguel quando o filme for nulo
- - __NÃO DEVE__ permiter aluguel quando o usuario for nulo
- - __NÃO DEVE__ permiter aluguel quando o filme for nulo
+ - __NÃO DEVE__ permitir aluguel quando o filme for nulo
+ - __NÃO DEVE__ permitir aluguel quando o usuario for nulo
  - __NÃO DEVE__ solicitar devolução aos domingos
 
 As regras acima foi testada utilizando o JUnit da seguinte forma:
