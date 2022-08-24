@@ -4,6 +4,7 @@ import br.ce.wcaquino.Exception.NaoPodeDividirPorZero;
 import br.ce.wcaquino.entidades.Calculadora;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class CalculadoraTest {
 
@@ -14,7 +15,7 @@ public class CalculadoraTest {
         calc = new Calculadora();
     }
 
-//    @Test
+    @Test
     public void deveSomarDoisValores(){
         //cenario
         int a = 5;
@@ -27,7 +28,7 @@ public class CalculadoraTest {
         Assert.assertEquals(8, result);
     }
 
-//    @Test
+    @Test
     public void deverSubtrairDoisValores(){
         //cenario
         int a = 10;
@@ -40,7 +41,7 @@ public class CalculadoraTest {
         Assert.assertEquals(5, result);
     }
 
-//    @Test
+    @Test
     public void deveDividirDoisValores() throws NaoPodeDividirPorZero {
         //cenario
         int a = 10;
@@ -53,7 +54,7 @@ public class CalculadoraTest {
         Assert.assertEquals(5, result);
     }
 
-//    @Test(expected = NaoPodeDividirPorZero.class)
+    @Test(expected = NaoPodeDividirPorZero.class)
     public void deveLançarExecaoAoDividirPorZero() throws NaoPodeDividirPorZero {
         //cenario
         int a = 10;
