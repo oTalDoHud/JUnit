@@ -20,7 +20,7 @@ Deve haver descontos progressivos da seguinte forma:
  - O __6º__ filme deve ter desconto de __100%__ em seu valor
  - O __7º__ filme não tera desconto
 
-A regra acima foi testada utilizando o JUnit da seguinte forma:
+As regras acima foi testada utilizando o JUnit da seguinte forma:
  
 ![Funcionamento do código - Primeiro Cenário](https://github.com/oTalDoHud/Junit/blob/main/assets/CalculoValorLocacao.png)
 
@@ -36,7 +36,7 @@ Nesse segundo cenário outras regras foram colocadas há teste:
  - __NÃO DEVE__ permiter aluguel quando o filme for nulo
  - __NÃO DEVE__ solicitar devolução aos domingos
 
-A regra acima foi testada utilizando o JUnit da seguinte forma:
+As regras acima foi testada utilizando o JUnit da seguinte forma:
 
 ![Funcionamento do código - Primeiro Cenário](https://github.com/oTalDoHud/Junit/blob/main/assets/SegundoCenario.png)
 
